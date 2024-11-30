@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+/log
+/demo_data/pcd_shucai
+/demo_data/result
+/build
+/bin
+/demo_data/*

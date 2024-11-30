@@ -1741,6 +1741,7 @@ class DataIo : public CloudUtility<PointT>
                 float max_intensity = -FLT_MAX;
                 for (int i = 0; i < in_block->pc_raw->points.size(); i++)
                 {
+                    // printf("intensity: %f\n", in_block->pc_raw->points[i].intensity);
                     min_intensity = min_(min_intensity, in_block->pc_raw->points[i].intensity);
                     max_intensity = max_(max_intensity, in_block->pc_raw->points[i].intensity);
                 }

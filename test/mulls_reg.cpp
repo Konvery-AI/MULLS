@@ -198,6 +198,11 @@ int main(int argc, char **argv)
 
     pcTPtr pc_s_tran(new pcT());
     pcl::transformPointCloud(*reg_con.block2->pc_down, *pc_s_tran, reg_con.Trans1_2);
+    
+    // // Transform pc_s_tran back to the original coordinate system
+    // pcTPtr pc_s_original(new pcT());
+    // Eigen::Matrix4d inverse_transform = reg_con.Trans1_2.inverse();
+    // pcl::transformPointCloud(*pc_s_tran, *pc_s_original, inverse_transform);
 
     if (launch_realtime_viewer)
     {
@@ -205,8 +210,26 @@ int main(int argc, char **argv)
         viewer.set_pause(1);
         viewer.display_2_pc_compare_realtime(reg_con.block2->pc_down, reg_con.block1->pc_down, pc_s_tran, reg_con.block1->pc_down, reg_viewer);
     }
+    
+    // Merge reg_con.block1->pc_raw and pc_s_tran point clouds
+    pcTPtr merged_cloud(new pcT());
+    *merged_cloud = *reg_con.block1->pc_down;
+    *merged_cloud += *pc_s_tran;
+    // Save the merged point cloud
+    dataio.write_cloud_file(filenameR, merged_cloud);
+    
+    // Save the transformation matrix
+    std::string trans_filename = filenameR.substr(0, filenameR.find_last_of('.')) + "_transform.txt";
+    std::ofstream trans_file(trans_filename);
+    if (trans_file.is_open()) {
+        trans_file << reg_con.Trans1_2 << std::endl;
+        trans_file.close();
+        LOG(INFO) << "Transformation matrix saved to: " << trans_filename;
+    } else {
+        LOG(ERROR) << "Unable to open file to save transformation matrix: " << trans_filename;
+    }
 
-    dataio.write_cloud_file(filenameR, pc_s_tran); //Write out the transformed Source Point Cloud
+    // dataio.write_cloud_file(filenameR, pc_s_tran); //Write out the transformed Source Point Cloud
 
     return 1;
 }

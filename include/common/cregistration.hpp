@@ -456,7 +456,9 @@ class CRegistration : public CloudUtility<PointT>
 			temp_descriptor(6) = (temp_descriptor_far % 10000) / 100;
 			temp_descriptor(7) = temp_descriptor_far % 100;
 			// other properties
+			
 			float cur_i = target_kpts->points[i].intensity;
+			// printf("intensity_min: %f, intensity_max: %f, cur_i: %f\n", intensity_min, intensity_max, target_kpts->points[i].intensity);
 			temp_descriptor(8) = (cur_i - intensity_min) / (intensity_max - intensity_min) * 255.0; //[0 - 255] //normalized intensity 
 			temp_descriptor(9) = target_kpts->points[i].normal[3] * 100;							//[0 - 100] //curvature
 			temp_descriptor(10) = target_kpts->points[i].data[3] * 30;								//[0 - 100] //height above ground

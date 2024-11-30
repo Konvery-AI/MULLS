@@ -295,6 +295,9 @@ if (BUILD_PAIRWISE_REG)
   target_link_libraries(mulls_reg ${DEP_LIBS})
 endif ()
 
+add_executable(mulls_merge ${PROJECT_SOURCE_DIR}/test/mulls_merge.cpp ${SRC_LIST})
+target_link_libraries(mulls_merge ${DEP_LIBS})
+
 if (BUILD_REPLAY)
   #test slam recapping and checking [compile at the first time]
   add_executable(replay_slam ${PROJECT_SOURCE_DIR}/test/vis_slam.cpp)

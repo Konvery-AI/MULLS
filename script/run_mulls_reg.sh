@@ -9,9 +9,11 @@ spc_path=xxxx/dummy_source_point_cloud.xxx
 opc_path=xxxx/dummy_transformed_source_point_cloud.xxx
 
 #demo example
-tpc_path=./demo_data/pcd/000000.pcd
-spc_path=./demo_data/pcd/000015.pcd
-opc_path=./demo_data/result/000015_reg.pcd
+tpc_path=/home/ubuntu/parking/00.pcd
+spc_path=/home/ubuntu/parking/00.pcd
+# tpc_path=/home/ubuntu/MULLS/demo_data/pcd_shucai/1717561701000.pcd
+# spc_path=/home/ubuntu/MULLS/demo_data/pcd_shucai/1717561701500.pcd
+opc_path=./demo_data/result/00_01.pcd
 
 #run
 #gdb --args \
@@ -23,7 +25,7 @@ opc_path=./demo_data/result/000015_reg.pcd
 --point_cloud_1_path=${tpc_path} \
 --point_cloud_2_path=${spc_path} \
 --output_point_cloud_path=${opc_path} \
---realtime_viewer_on=true \
+--realtime_viewer_on=false \
 --cloud_1_down_res=0.00 \
 --cloud_2_down_res=0.00 \
 --dist_inverse_sampling_method=2 \

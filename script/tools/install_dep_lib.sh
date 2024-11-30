@@ -63,7 +63,8 @@ sudo apt-get install -y libatlas-base-dev
 # SuiteSparse and CXSparse (optional)
 sudo apt-get install -y libsuitesparse-dev
 #clone ceres to local
-git clone -b 2.0.0 --depth 1 https://github.com/ceres-solver/ceres-solver.git
+#git clone -b 2.0.0 --depth 1 https://github.com/ceres-solver/ceres-solver.git
+ls
 (
   cd ceres-solver
   mkdir build
@@ -92,7 +93,7 @@ echo "install [ceres] done"
 # echo "install [gtsam] done"
 
 echo "install [sophus]"
-git clone --depth 1 https://github.com/strasdat/Sophus.git
+#git clone --depth 1 https://github.com/strasdat/Sophus.git
 (
   cd Sophus
   mkdir build
@@ -108,7 +109,7 @@ echo "install [libLAS]"
 echo "install libLAS dependent libs: geotiff"
 sudo apt-get install -y libgeotiff-dev
 #clone LibLAS to local
-git clone --depth 1 https://github.com/libLAS/libLAS.git
+#git clone --depth 1 https://github.com/libLAS/libLAS.git
 (
   cd libLAS
   mkdir build
@@ -122,7 +123,7 @@ echo "install [libLAS] done"
 
 echo "install [TEASER++]"
 echo "Cmake version >= 3.10 required"
-git clone --depth 1 https://github.com/MIT-SPARK/TEASER-plusplus.git
+#git clone --depth 1 https://github.com/MIT-SPARK/TEASER-plusplus.git
 (
   cd TEASER-plusplus
   mkdir build

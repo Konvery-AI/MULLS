@@ -34,28 +34,30 @@ RUN if [ $(lsb_release -cs) = xenial ]; then \
     else \
         python3 -m pip install --upgrade pip; \
     fi
+#WORKDIR /
+#ADD libLAS Sophus TEASER-plusplus ceres-solver /
+#ADD . .
+#ADD script/tools/install_dep_lib.sh script/tools/install_dep_lib.sh
+#ADD python/requirements.txt python/requirements.txt
 
-ADD script/tools/install_dep_lib.sh script/tools/install_dep_lib.sh
-ADD python/requirements.txt python/requirements.txt
+#ARG NPROC=""
 
-ARG NPROC=""
+#RUN DEBIAN_FRONTEND=noninteractive NPROC=${NPROC} bash script/tools/install_dep_lib.sh
 
-RUN DEBIAN_FRONTEND=noninteractive NPROC=${NPROC} bash script/tools/install_dep_lib.sh
+#FROM prereqs
 
-FROM prereqs
+#ADD . .
 
-ADD . .
+#ARG CXX_COMPILER=clang++
+#RUN rm -rf build && \
+#    mkdir build && \
+#    cd build && \
+#    cmake .. -DBUILD_WITH_SOPHUS=ON -DBUILD_WITH_PROJ4=ON -DBUILD_WITH_LIBLAS=ON -DCMAKE_CXX_COMPILER=${CXX_COMPILER} && \
+#    make -j${NPROC}
 
-ARG CXX_COMPILER=clang++
-RUN rm -rf build && \
-    mkdir build && \
-    cd build && \
-    cmake .. -DBUILD_WITH_SOPHUS=ON -DBUILD_WITH_PROJ4=ON -DBUILD_WITH_LIBLAS=ON -DCMAKE_CXX_COMPILER=${CXX_COMPILER} && \
-    make -j${NPROC}
-
-RUN apt-get install -y xvfb
-RUN sed -i 's/real_time_viewer_on=1/real_time_viewer_on=0/g' script/run_mulls_slam.sh
-ENTRYPOINT ["/usr/bin/xvfb-run", "-a", "-s", "-screen 0 1024x768x24"]
-CMD ["script/run_mulls_slam.sh"]
+#RUN apt-get install -y xvfb
+#RUN sed -i 's/real_time_viewer_on=1/real_time_viewer_on=0/g' script/run_mulls_slam.sh
+#ENTRYPOINT ["/usr/bin/xvfb-run", "-a", "-s", "-screen 0 1024x768x24"]
+#CMD ["script/run_mulls_slam.sh"]
 
 # /usr/bin/xvfb-run -a -s '-screen 0 1024x768x24' script/run_mulls_slam.sh
